@@ -1,122 +1,185 @@
 "use client";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import TiltCard from "./TiltCard";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
 
 const PROJECTS = [
   {
-    title: "Open Source Vanguard",
-    category: "Global Contributions",
-    description:
-      "Significant contributions to large-scale enterprise repositories, writing production-grade code that impacts thousands of developers globally.",
-    tags: ["C++", "Python", "Git", "CI/CD"],
-    image: "/proj-opensource.png",
-    link: "https://github.com/amitraghvan",
+    num: "01",
+    title: "Cinematic Beats Hub",
+    category: "AI Music Platform",
+    description: "An immersive mobile-first platform featuring 3D particles and an AI generator for creating personalized, mood-based soundtracks.",
+    tags: ["React Three Fiber", "AI/LLM", "TypeScript", "Tailwind"],
+    image: "/testimonial.png", // Using existing image as fallback
+    link: "https://cinematic-beats-hub.vercel.app/",
+    stat: "3D & AI",
   },
   {
-    title: "AI Model Observatory",
-    category: "Machine Learning",
-    description:
-      "Intelligent system for tracking and training machine learning models. Built with advanced prompt engineering using LangChain and Python.",
-    tags: ["Python", "TensorFlow", "FastAPI", "React"],
-    image: "/proj-ai-obs.png",
-    link: "#",
+    num: "02",
+    title: "Campus Careers Mate",
+    category: "EdTech Platform",
+    description: "A comprehensive platform for university students to track applications, practice interviews, and manage their career progression efficiently.",
+    tags: ["React", "Node.js", "MongoDB", "Express"],
+    image: "/testimonial.png",
+    link: "https://campus-careers-mate-948h.vercel.app/",
+    stat: "Student Hub",
   },
   {
-    title: "Agentic Portfolio",
-    category: "Immersive UI/UX",
-    description:
-      "A highly engineered digital environment utilizing modern web capabilities to serve as a premium showcase of technical proficiency.",
-    tags: ["Next.js", "React 19", "Tailwind", "Motion"],
-    image: "/proj-portfolio.png",
+    num: "03",
+    title: "Yadav Traders Portal",
+    category: "E-Commerce System",
+    description: "A full-stack digital storefront and robust inventory management system built to scale a local trading business into the digital age.",
+    tags: ["Next.js", "PostgreSQL", "Prisma", "Tailwind"],
+    image: "/testimonial.png",
+    link: "https://vastrika-prime-hub.vercel.app/",
+    stat: "B2B SaaS",
+  },
+  {
+    num: "04",
+    title: "DG Travel",
+    category: "Travel & Tourism",
+    description: "A modern, highly-responsive web application for booking travel packages. Features a seamless checkout experience and dynamic itinerary generation.",
+    tags: ["Next.js", "React", "Node.js", "Stripe API"],
+    image: "/testimonial.png",
+    link: "https://www.dgtravel.in/",
+    stat: "Booking App",
+  },
+  {
+    num: "05",
+    title: "Desi Chaos Game",
+    category: "Game Development",
+    description: "A highly interactive 2D Unity survival game capturing the unpredictability and humor of everyday Indian life with robust player systems.",
+    tags: ["Unity 2D", "C#", "Game Physics", "UI/UX"],
+    image: "/testimonial.png",
     link: "#",
+    stat: "Game Engine",
+  },
+  {
+    num: "06",
+    title: "Astro AI",
+    category: "AI Astrology Platform",
+    description: "An intelligent astrology platform powered by LLMs, providing personalized insights, horoscope generation, and interactive guidance.",
+    tags: ["Full-Stack", "AI/LLM", "React", "Next.js"],
+    image: "/testimonial.png",
+    link: "https://astro-ai-two-weld.vercel.app/",
+    stat: "AI Powered",
   },
 ];
 
 export default function ProjectsSection() {
-  return (
-    <section
-      id="projects"
-      className="section-spacing section-wrap border-t border-[var(--border-subtle)]"
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="flex items-end justify-between mb-14"
-      >
-        <div>
-          <span className="label-mono">Selected Work</span>
-          <h2 className="headline-section mt-4">
-            Projects Built<br />
-            With Purpose.
-          </h2>
-        </div>
-      </motion.div>
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [hovered, setHovered] = useState<number | null>(null);
 
-      <div className="space-y-6">
-        {PROJECTS.map((p, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-10%" }}
-            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+  return (
+    <section ref={ref} id="projects" style={{ background: "var(--bg)", position: "relative", overflow: "hidden" }}>
+      <div className="section-wrap section-spacing">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "4rem", flexWrap: "wrap", gap: "2rem" }}
+        >
+          <div>
+            <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", letterSpacing: "0.3em", color: "#888888", textTransform: "uppercase", fontWeight: 600 }}>Selected Work</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 700, letterSpacing: "-0.05em", color: "var(--fg)", margin: "16px 0 0 0", lineHeight: 1 }}>
+              Projects built<br />
+              <span style={{ color: "var(--red)" }}>with purpose.</span>
+            </h2>
+          </div>
+          <motion.a
+            href="https://github.com/amitraghvan"
+            target="_blank" rel="noreferrer"
+            className="btn-ghost"
+            whileHover={{ scale: 1.04 }}
           >
-            <TiltCard>
+            GitHub ↗
+          </motion.a>
+        </motion.div>
+
+        {/* Project cards — Flat Brutalist */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "1.5rem" }}>
+          {PROJECTS.map((p, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 50 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              onHoverStart={() => setHovered(i)}
+              onHoverEnd={() => setHovered(null)}
+              style={{ height: "100%" }}
+            >
               <a
                 href={p.link}
                 target={p.link !== "#" ? "_blank" : undefined}
                 rel="noopener noreferrer"
-                className="group flex flex-col md:flex-row gap-6 p-6 md:p-8 border border-[var(--border-subtle)] rounded-2xl hover:border-[var(--border-strong)] bg-[var(--surface)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] transition-all cursor-pointer h-full"
+                className="glass"
+                style={{
+                  display: "flex", flexDirection: "column",
+                  textDecoration: "none",
+                  height: "100%", transition: "all 0.3s",
+                  borderColor: hovered === i ? "var(--red)" : "var(--border)",
+                }}
               >
-            {/* Image */}
-            <div className="relative aspect-video md:aspect-[4/3] w-full md:w-2/5 rounded-xl overflow-hidden bg-[var(--surface-elevated)] shrink-0">
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-[0.22,1,0.36,1]"
-                sizes="(max-width: 768px) 100vw, 35vw"
-              />
-            </div>
-
-            {/* Content */}
-            <div className="flex flex-col justify-between py-2 flex-1 md:w-3/5">
-              <div>
-                <div className="text-[11px] font-mono text-[var(--text-muted)] tracking-wider uppercase mb-2">
-                  {p.category}
+                {/* Image */}
+                <div style={{ position: "relative", paddingBottom: "56.25%", overflow: "hidden", borderBottom: "1px solid var(--border)" }}>
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    fill
+                    style={{ objectFit: "cover", transition: "transform 0.7s ease, filter 0.5s", filter: hovered === i ? "grayscale(0%)" : "grayscale(100%) contrast(1.2)" }}
+                    className={hovered === i ? "scale-105" : "scale-100"}
+                    sizes="40vw"
+                  />
+                  {/* Stat badge */}
+                  <div style={{
+                    position: "absolute", top: 16, right: 16,
+                    padding: "6px 12px",
+                    background: "var(--red)", color: "#111",
+                    fontFamily: "var(--font-sans)", fontSize: 10,
+                    letterSpacing: "0.1em", fontWeight: 800,
+                    textTransform: "uppercase"
+                  }}>
+                    {p.stat}
+                  </div>
+                  <div style={{
+                    position: "absolute", top: 16, left: 16,
+                    fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 800,
+                    color: "var(--red)",
+                  }}>
+                    {p.num}
+                  </div>
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[var(--text-primary)] mb-3 group-hover:text-[var(--accent)] transition-colors">
-                  {p.title}
-                </h3>
-                <p className="body-base text-sm md:text-base max-w-md">
-                  {p.description}
-                </p>
-              </div>
 
-              <div className="flex items-center justify-between mt-6">
-                <div className="flex flex-wrap gap-2">
-                  {p.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-medium bg-[var(--surface)] border border-[var(--border-subtle)] text-[var(--text-tertiary)] rounded-full"
+                {/* Content */}
+                <div style={{ padding: "2rem", flex: 1, display: "flex", flexDirection: "column", background: "var(--bg)" }}>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>
+                    {p.category}
+                  </div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.04em", marginBottom: 16 }}>
+                    {p.title}
+                  </h3>
+                  <p style={{ fontSize: "1rem", color: "var(--fg-3)", lineHeight: 1.6, flex: 1 }}>{p.description}</p>
+
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 24 }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+                      {p.tags.map(t => (
+                        <span key={t} className="tag" style={{ border: "1px solid var(--border-2)", color: "var(--fg-2)", background: "transparent" }}>{t}</span>
+                      ))}
+                    </div>
+                    <motion.div
+                      animate={hovered === i ? { rotate: 45, backgroundColor: "var(--red)", color: "#111" } : { rotate: 0, backgroundColor: "transparent", color: "var(--fg-3)" }}
+                      style={{ width: 40, height: 40, border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.3s" }}
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      <ArrowUpRight size={18} />
+                    </motion.div>
+                  </div>
                 </div>
-
-                <div className="w-10 h-10 rounded-full border border-[var(--border-strong)] flex items-center justify-center group-hover:bg-[var(--text-primary)] group-hover:text-white group-hover:border-transparent transition-all shrink-0 ml-4">
-                  <ArrowUpRight size={16} />
-                </div>
-              </div>
-              </div>
-            </a>
-          </TiltCard>
-        </motion.div>
-        ))}
+              </a>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

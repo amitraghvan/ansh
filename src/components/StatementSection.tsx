@@ -1,34 +1,67 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export default function StatementSection() {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-15%" });
+
+  const WORDS = ["complexity", "into", "clarity", "—", "one", "system", "at", "a", "time."];
+
   return (
-    <section className="bg-[#0f0f0f] text-white py-24 md:py-40 overflow-hidden relative border-t border-b border-[#222]">
-      <div className="section-wrap relative">
-        <div className="absolute top-0 right-4 text-right text-[10px] font-mono tracking-widest text-white/50 uppercase hidden md:block">
-          {new Date().getFullYear()}, LATEST BUILD<br/>
-          REMOTE WORK (IN)<br/>
-          AI & SYSTEMS
-        </div>
-        
-        <motion.h2 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-[clamp(2.5rem,6vw,6rem)] font-extrabold leading-[0.95] tracking-tighter max-w-[90vw]"
+    <section ref={ref} style={{ position: "relative", padding: "8rem 0", overflow: "hidden", background: "var(--bg-2)" }}>
+      <div style={{ position: "absolute", inset: 0, borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }} />
+
+      {/* Solid flat grid */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        backgroundImage: "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
+        backgroundSize: "60px 60px",
+        opacity: 0.1,
+      }} />
+
+      <div className="section-wrap" style={{ position: "relative", zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.2em", color: "var(--fg-3)", textTransform: "uppercase", marginBottom: 32 }}
         >
-          Pushing boundaries<br />
-          <span className="text-white/60">with artificial intelligence and a relentless<br /></span>
-          passion one line of code at a time.
-        </motion.h2>
-      </div>
-      
-      {/* Background massive faded text (like 'Something I've dreamed of' in screenshot) */}
-      <div className="absolute -bottom-10 left-0 right-0 overflow-hidden select-none pointer-events-none z-0 opacity-[0.03]">
-        <h1 className="text-[15vw] font-extrabold whitespace-nowrap tracking-tighter">
-          INTELLIGENT SYSTEMS
-        </h1>
+          {new Date().getFullYear()} · Core Manifesto
+        </motion.div>
+
+        <h2 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(2rem, 6vw, 6rem)",
+          fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1,
+          display: "flex", flexWrap: "wrap", gap: "0.3em",
+        }}>
+          {["Turning"].map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 60, rotateX: -60 }}
+              animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ delay: i * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{ display: "inline-block", color: "var(--fg)", perspective: 1000 }}
+            >
+              {word}
+            </motion.span>
+          ))}
+          {WORDS.map((word, i) => (
+            <motion.span
+              key={word + i}
+              initial={{ opacity: 0, y: 60, rotateX: -60 }}
+              animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+              transition={{ delay: (i + 1) * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              style={{
+                display: "inline-block",
+                perspective: 1000,
+                color: (i > 1 && i < 5) ? "var(--red)" : "var(--fg)",
+              }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </h2>
       </div>
     </section>
   );

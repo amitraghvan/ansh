@@ -1,128 +1,155 @@
 "use client";
-import { Send } from "lucide-react";
-import { motion } from "framer-motion";
+import { Send, MapPin, Clock } from "lucide-react";
+import { GithubIcon, LinkedinIcon, TwitterIcon, WhatsAppIcon } from "./SocialIcons";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+
+const SOCIALS = [
+  { icon: GithubIcon,   href: "https://github.com/amitraghvan", label: "GitHub" },
+  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/amitraghvan/", label: "LinkedIn" },
+  { icon: TwitterIcon,  href: "#", label: "Twitter" },
+  { icon: WhatsAppIcon, href: "https://wa.me/+917488698672", label: "WhatsApp" },
+];
 
 export default function ContactSection() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-10%" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Implementation ready for API
+    setSending(true);
+    await new Promise(r => setTimeout(r, 1500));
+    setSending(false);
+    setSent(true);
+    setTimeout(() => setSent(false), 4000);
   };
 
   return (
-    <section
-      id="contact"
-      className="section-spacing section-wrap border-t border-[var(--border-subtle)]"
-    >
-      <div className="grid lg:grid-cols-2 gap-16 items-start">
-        {/* Left */}
+    <section ref={ref} id="contact" style={{ background: "var(--bg)", position: "relative", overflow: "hidden" }}>
+      <div className="section-wrap section-spacing">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          style={{ textAlign: "center", marginBottom: "5rem" }}
         >
-          <span className="label-mono">Get in Touch</span>
-          <h2 className="headline-section mt-4 mb-6">
-            Let&apos;s Build Something<br />
-            World-Class.
+          <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", letterSpacing: "0.3em", color: "#888888", textTransform: "uppercase", fontWeight: 600 }}>Get in Touch</span>
+          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 700, letterSpacing: "-0.05em", color: "var(--fg)", margin: "16px 0 0 0", lineHeight: 1 }}>
+            Let&apos;s build something<br />
+            <span style={{ color: "var(--red)" }}>world-class.</span>
           </h2>
-          <p className="body-large text-[var(--text-tertiary)] max-w-md mb-8">
-            Whether you are looking for an ambitious AI Engineer, a full-stack
-            architect, or just want to discuss the future of ML — my inbox
-            is open.
-          </p>
-
-          <div className="flex items-center gap-3 text-sm text-[var(--text-secondary)]">
-            <div className="w-2.5 h-2.5 rounded-full bg-[var(--success)] animate-pulse"></div>
-            Remote / Relocation Open
-          </div>
-
-          {/* Social Links */}
-          <div className="flex gap-6 mt-10">
-            <a
-              href="https://github.com/amitraghvan"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hover-underline"
-            >
-              GitHub
-            </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hover-underline"
-            >
-              LinkedIn
-            </a>
-            <a
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors hover-underline"
-            >
-              Twitter
-            </a>
-          </div>
         </motion.div>
 
-        {/* Right — Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="p-8 md:p-10 border border-[var(--border-subtle)] rounded-2xl"
-        >
-          <div className="flex items-center gap-3 mb-8 pb-5 border-b border-[var(--border-subtle)]">
-            <div className="w-10 h-10 rounded-full bg-[var(--text-primary)] text-white flex items-center justify-center">
-              <Send size={16} />
-            </div>
-            <h3 className="text-lg font-bold text-[var(--text-primary)]">
-              Send a Message
-            </h3>
-          </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: "4rem", alignItems: "start" }} className="lg:grid-cols-2">
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
-                Name
-              </label>
-              <input
-                type="text"
-                placeholder="Your name"
-                className="input-field"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
-                Email Address
-              </label>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                className="input-field"
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)]">
-                Message
-              </label>
-              <textarea
-                rows={4}
-                placeholder="Tell me about your project..."
-                className="input-field resize-none"
-                required
-              ></textarea>
+          {/* Left info */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+          >
+            {/* Info cards */}
+            {[
+              { icon: MapPin, label: "Location",  value: "Lucknow, India · Remote OK" },
+              { icon: Clock,  label: "Response",  value: "Usually within 24 hours" },
+            ].map(({ icon: Icon, label, value }) => (
+              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, padding: "1.25rem 1.5rem", border: "1px solid var(--border)" }}>
+                <div style={{ width: 44, height: 44, borderRadius: 0, background: "transparent", border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--red)", flexShrink: 0 }}>
+                  <Icon size={18} />
+                </div>
+                <div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 4, fontWeight: 600 }}>{label}</div>
+                  <div style={{ fontWeight: 600, color: "var(--fg)", fontSize: "0.95rem" }}>{value}</div>
+                </div>
+              </div>
+            ))}
+
+            {/* Availability badge */}
+            <div style={{ padding: "1.25rem 1.5rem", borderLeft: "3px solid var(--red)", background: "var(--bg)", border: "1px solid var(--border)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+                <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--red)" }} />
+                <span style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--red)", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Available Now</span>
+              </div>
+              <p style={{ fontSize: "0.9rem", color: "var(--fg-2)", lineHeight: 1.7 }}>
+                Open to full-time roles, freelance contracts, and exciting collaborations in AI & Full-Stack.
+              </p>
             </div>
 
-            <button type="submit" className="btn-primary w-full mt-4">
-              Send Message
-              <Send size={16} />
-            </button>
-          </form>
-        </motion.div>
+            {/* Socials */}
+            <div style={{ display: "flex", gap: 12 }}>
+              {SOCIALS.map(({ icon: Icon, href, label }) => (
+                <motion.a
+                  key={label} href={href} target="_blank" rel="noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  title={label}
+                  style={{ width: 48, height: 48, borderRadius: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--fg-2)", textDecoration: "none", border: "1px solid var(--border)", transition: "color 0.2s, border-color 0.2s" }}
+                  onMouseEnter={e => { e.currentTarget.style.color = "var(--red)"; e.currentTarget.style.borderColor = "var(--red)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = "var(--fg-2)"; e.currentTarget.style.borderColor = "var(--border)"; }}
+                >
+                  <Icon size={20} />
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            style={{ padding: "2.5rem", border: "1px solid var(--border)", background: "var(--bg)" }}
+          >
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+                {[
+                  { label: "Name",  type: "text",  placeholder: "Your name",    id: "name"  },
+                  { label: "Email", type: "email", placeholder: "your@email.com", id: "email" },
+                ].map(f => (
+                  <div key={f.id}>
+                    <label htmlFor={f.id} style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                      {f.label}
+                    </label>
+                    <input id={f.id} type={f.type} placeholder={f.placeholder} required className="input-field" />
+                  </div>
+                ))}
+              </div>
+
+              <div>
+                <label htmlFor="subject" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                  Subject
+                </label>
+                <input id="subject" type="text" placeholder="What's this about?" className="input-field" />
+              </div>
+
+              <div>
+                <label htmlFor="message" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                  Message
+                </label>
+                <textarea id="message" rows={5} placeholder="Tell me about your project..." required className="input-field" style={{ resize: "none" }} />
+              </div>
+
+              <motion.button
+                type="submit"
+                className="btn-primary"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                disabled={sending || sent}
+                style={{ width: "100%", opacity: sending ? 0.7 : 1, gap: 10, position: "relative", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}
+              >
+                {sent ? (
+                  <span>✓ Message Sent!</span>
+                ) : sending ? (
+                  <span>Sending...</span>
+                ) : (
+                  <>Send Message <Send size={16} /></>
+                )}
+              </motion.button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

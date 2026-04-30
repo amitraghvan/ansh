@@ -1,139 +1,175 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
+import { motion, AnimatePresence } from "framer-motion";
+import { WhatsAppIcon } from "./SocialIcons";
 
 const LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Works", href: "#projects" },
-  { label: "Skills", href: "#skills" },
-  { label: "Journey", href: "#journey" },
+  { label: "About",   href: "#about"    },
+  { label: "Works",   href: "#projects" },
+  { label: "Skills",  href: "#skills"   },
+  { label: "Journey", href: "#journey"  },
 ];
-
-const go = (href: string) => {
-  const el = document.getElementById(href.replace("#", ""));
-  if (el) {
-    const y = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  }
-};
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [time, setTime] = useState("");
+  const [open, setOpen]         = useState(false);
+  const [time, setTime]         = useState("");
+  const { theme, toggle }       = useTheme();
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 30);
+    const fn = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
 
   useEffect(() => {
-    const update = () => {
-      setTime(
-        new Date().toLocaleTimeString("en-IN", {
-          hour: "2-digit",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true,
-        })
-      );
-    };
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
+    const tick = () => setTime(new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true }));
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
   }, []);
 
+  const scrollTo = (href: string) => {
+    const el = document.getElementById(href.replace("#", ""));
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: "smooth" });
+    setOpen(false);
+  };
+
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-white/90 backdrop-blur-xl shadow-[0_1px_0_rgba(0,0,0,0.06)] py-3"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="section-wrap flex items-center justify-between">
-        {/* Left: Time */}
-        <div className="hidden md:flex items-center gap-2 text-[12px] font-mono text-[var(--text-muted)] tracking-wider uppercase min-w-[200px]">
-          <span>INDIA TIME</span>
-          <span className="text-[var(--text-tertiary)]">— {time}</span>
-        </div>
+    <>
+      <motion.header
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-[var(--bg)] border-b border-[var(--border)]"
+            : "bg-transparent"
+        }`}
+        style={{ padding: scrolled ? "12px 0" : "22px 0" }}
+      >
+        <div className="section-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 
-        {/* Center: Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => {
-                e.preventDefault();
-                go(l.href);
-              }}
-              className="text-[13px] font-medium text-[var(--text-tertiary)] hover:text-[var(--text-primary)] transition-colors tracking-wide uppercase"
+          {/* Logo */}
+          <motion.a href="#" whileHover={{ scale: 1.05 }} style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
+            <div style={{
+              width: 36, height: 36,
+              background: "var(--red)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 16, color: "#111",
+            }}>A</div>
+            <div>
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 15, color: "var(--fg)", letterSpacing: "-0.02em", textTransform: "uppercase" }}>
+                Amit Kumar
+              </div>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--fg-3)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+                {time} · LKO
+              </div>
+            </div>
+          </motion.a>
+
+          {/* Desktop nav */}
+          <nav className="hidden md:flex" style={{ gap: 40, alignItems: "center" }}>
+            {LINKS.map((l, i) => (
+              <motion.button
+                key={l.href}
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 + i * 0.08 }}
+                onClick={() => scrollTo(l.href)}
+                whileHover={{ color: "var(--red)" }}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  fontFamily: "var(--font-mono)", fontSize: 11, fontWeight: 600,
+                  letterSpacing: "0.15em", textTransform: "uppercase",
+                  color: "var(--fg-2)", padding: 0, transition: "color 0.2s",
+                }}
+              >
+                {l.label}
+              </motion.button>
+            ))}
+          </nav>
+
+          {/* Right actions */}
+          <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+            {/* Theme toggle removed */}
+
+            {/* CTA */}
+            <motion.a
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
+              href="https://wa.me/917488698672"
+              target="_blank" rel="noreferrer"
+              className="btn-primary hidden md:flex"
+              style={{ padding: "0.6rem 1.4rem", fontSize: "0.75rem", textDecoration: "none", gap: "0.5rem", alignItems: "center" }}
             >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+              <WhatsAppIcon size={14} />
+              Connect
+            </motion.a>
 
-        {/* Right: Contact Button */}
-        <div className="hidden md:flex items-center justify-end min-w-[200px]">
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              go("#contact");
+            {/* Mobile toggle */}
+            <button
+              className="md:hidden"
+              onClick={() => setOpen(v => !v)}
+              style={{ background: "none", border: "none", cursor: "pointer", color: "var(--fg)" }}
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            style={{
+              position: "fixed", top: 0, right: 0, bottom: 0, width: "min(80vw, 360px)",
+              background: "var(--bg-2)", borderLeft: "1px solid var(--border)",
+              zIndex: 100, padding: "6rem 2rem 2rem",
+              display: "flex", flexDirection: "column", gap: "2rem",
             }}
-            className="btn-primary text-[13px] py-2.5 px-5"
           >
-            Contact
-          </a>
-        </div>
-
-        {/* Mobile: Logo + Toggle */}
-        <div className="md:hidden flex items-center justify-between w-full">
-          <span className="text-sm font-bold tracking-tight text-[var(--text-primary)]">
-            Amit Kumar
-          </span>
-          <button
-            className="text-[var(--text-secondary)] p-1"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X size={22} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
+            {LINKS.map((l, i) => (
+              <motion.button
+                key={l.href}
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.07 }}
+                onClick={() => scrollTo(l.href)}
+                style={{
+                  background: "none", border: "none", cursor: "pointer",
+                  textAlign: "left", fontSize: 28, fontWeight: 800,
+                  fontFamily: "var(--font-display)", color: "var(--fg)",
+                  letterSpacing: "-0.03em", textTransform: "uppercase",
+                }}
+              >
+                {l.label}
+              </motion.button>
+            ))}
+            <div style={{ display: "flex", gap: 12, marginTop: "auto" }}>
+              {/* Mobile theme toggle removed */}
+              <a href="https://wa.me/917488698672" target="_blank" rel="noreferrer" className="btn-primary" style={{ flex: 2, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", textDecoration: "none" }}>
+                <WhatsAppIcon size={18} />
+                Connect
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       {open && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-[var(--border-subtle)] p-6 flex flex-col gap-5 shadow-xl">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={(e) => {
-                e.preventDefault();
-                setOpen(false);
-                go(l.href);
-              }}
-              className="text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--text-primary)] uppercase tracking-wide"
-            >
-              {l.label}
-            </a>
-          ))}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              setOpen(false);
-              go("#contact");
-            }}
-            className="btn-primary text-sm w-fit"
-          >
-            Contact
-          </a>
-        </div>
+        <div
+          onClick={() => setOpen(false)}
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.8)", zIndex: 99 }}
+        />
       )}
-    </header>
+    </>
   );
 }
