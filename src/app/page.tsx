@@ -9,7 +9,6 @@ import AboutSection from "@/components/AboutSection";
 import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import StatementSection from "@/components/StatementSection";
-import TimelineSection from "@/components/TimelineSection";
 import AwardsSection from "@/components/AwardsSection";
 import TestimonialSection from "@/components/TestimonialSection";
 import ContactSection from "@/components/ContactSection";
@@ -27,7 +26,6 @@ export default function Home() {
         <SkillsSection />
         <StatementSection />
         <ProjectsSection />
-        <TimelineSection />
         <AwardsSection />
         <TestimonialSection />
         <ContactSection />
