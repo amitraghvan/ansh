@@ -44,7 +44,7 @@ export default function HeroSection() {
     <section ref={ref} style={{
       position: "relative",
       height: "100vh",
-      width: "100vw",
+      width: "100%",
       overflow: "hidden",
       backgroundColor: "#111111", // Dark background matching the reference
       color: "#e3dfc8",          // Sand/beige text matching the reference

@@ -169,8 +169,9 @@ export default function ProjectsSection() {
                       ))}
                     </div>
                     <motion.div
-                      animate={hovered === i ? { rotate: 45, backgroundColor: "var(--red)", color: "#111" } : { rotate: 0, backgroundColor: "transparent", color: "var(--fg-3)" }}
-                      style={{ width: 40, height: 40, border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.3s" }}
+                      animate={hovered === i ? { rotate: 45, backgroundColor: "#eb5939", color: "#111" } : { rotate: 0, backgroundColor: "rgba(0, 0, 0, 0)", color: "var(--fg-3)" }}
+                      transition={{ duration: 0.25 }}
+                      style={{ width: 40, height: 40, border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
                     >
                       <ArrowUpRight size={18} />
                     </motion.div>

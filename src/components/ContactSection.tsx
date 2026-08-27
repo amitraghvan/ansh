@@ -52,7 +52,7 @@ export default function ContactSection() {
           >
             {/* Info cards */}
             {[
-              { icon: MapPin, label: "Location",  value: "Lucknow, India · Remote OK" },
+              { icon: MapPin, label: "Location",  value: "Punjab, India · Remote OK" },
               { icon: Clock,  label: "Response",  value: "Usually within 24 hours" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, padding: "1.25rem 1.5rem", border: "1px solid var(--border)" }}>

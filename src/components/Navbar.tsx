@@ -64,7 +64,7 @@ export default function Navbar() {
                 Amit Kumar
               </div>
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--fg-3)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
-                {time} · LKO
+                {time} · PUNJAB, INDIA
               </div>
             </div>
           </motion.a>
