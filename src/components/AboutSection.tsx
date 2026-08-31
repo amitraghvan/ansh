@@ -28,25 +28,40 @@ export default function AboutSection() {
       }
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (ref.current && e.touches.length > 0) {
+        const rect = ref.current.getBoundingClientRect();
+        mouseX.set(e.touches[0].clientX - rect.left);
+        mouseY.set(e.touches[0].clientY - rect.top);
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchstart", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [mouseX, mouseY]);
 
-  const clipPath = useMotionTemplate`circle(clamp(80px, 15vw, 250px) at ${cursorX}px ${cursorY}px)`;
+  const clipPath = useMotionTemplate`circle(clamp(70px, 16vw, 240px) at ${cursorX}px ${cursorY}px)`;
 
   return (
     <section ref={ref} id="about" style={{ 
       backgroundColor: "#111111",
       position: "relative", 
       overflow: "hidden",
-      padding: "10rem 0",
-      minHeight: "100vh",
+      padding: "clamp(4.5rem, 10vw, 9rem) 0",
+      minHeight: "80vh",
       display: "flex",
       flexDirection: "column",
       justifyContent: "center"
     }}>
       {/* ── BASE LAYER (Dark background, Beige text) ── */}
-      <div className="section-wrap" style={{ padding: "0 5%", position: "relative", zIndex: 1 }}>
+      <div className="section-wrap" style={{ position: "relative", zIndex: 1 }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -57,7 +72,7 @@ export default function AboutSection() {
             letterSpacing: "0.3em", 
             color: "#888888", 
             textTransform: "uppercase", 
-            marginBottom: "3rem",
+            marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
             fontWeight: 600
           }}
         >
@@ -70,19 +85,16 @@ export default function AboutSection() {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(2.5rem, 6vw, 6.5rem)",
-            fontWeight: 700, // Thicker font
-            lineHeight: 1.05,
-            letterSpacing: "-0.05em", // Tighter tracking like the screenshot
+            fontSize: "clamp(1.85rem, 5.5vw, 5.5rem)",
+            fontWeight: 700,
+            lineHeight: 1.12,
+            letterSpacing: "-0.04em",
             color: "#dcd6c8",
-            maxWidth: "95%",
+            maxWidth: "100%",
             margin: 0
           }}
         >
-          I&apos;m a <span style={{ color: "#eb5939" }}>selectively skilled</span> product<br className="hidden md:block" />
-          designer with strong focus on<br className="hidden md:block" />
-          producing high quality &amp;<br className="hidden md:block" />
-          impactful digital experience.
+          I&apos;m a <span style={{ color: "#eb5939" }}>selectively skilled</span> product designer with strong focus on producing high quality &amp; impactful digital experience.
         </motion.h2>
 
         <motion.div
@@ -95,7 +107,7 @@ export default function AboutSection() {
             letterSpacing: "0.3em", 
             color: "#888888", 
             textTransform: "uppercase", 
-            marginTop: "10rem",
+            marginTop: "clamp(3rem, 6vw, 6rem)",
             fontWeight: 600
           }}
         >
@@ -117,7 +129,7 @@ export default function AboutSection() {
           justifyContent: "center"
         }}
       >
-        <div className="section-wrap" style={{ padding: "0 5%" }}>
+        <div className="section-wrap">
           <div
             style={{ 
               fontFamily: "var(--font-sans)", 
@@ -125,7 +137,7 @@ export default function AboutSection() {
               letterSpacing: "0.3em", 
               color: "#111111", 
               textTransform: "uppercase", 
-              marginBottom: "3rem",
+              marginBottom: "clamp(1.5rem, 3vw, 2.5rem)",
               fontWeight: 600,
               opacity: inView ? 1 : 0,
             }}
@@ -136,20 +148,17 @@ export default function AboutSection() {
           <h2
             style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(2.5rem, 6vw, 6.5rem)",
+              fontSize: "clamp(1.85rem, 5.5vw, 5.5rem)",
               fontWeight: 700,
-              lineHeight: 1.05,
-              letterSpacing: "-0.05em",
+              lineHeight: 1.12,
+              letterSpacing: "-0.04em",
               color: "#111111",
-              maxWidth: "95%",
+              maxWidth: "100%",
               margin: 0,
               opacity: inView ? 1 : 0,
             }}
           >
-            I&apos;m a visual designer<br className="hidden md:block" />
-            haven&apos;t been<br className="hidden md:block" />
-            (pret) - making<br className="hidden md:block" />
-            paycheck.
+            I&apos;m a visual designer crafting modern software that speaks for itself.
           </h2>
 
           <div
@@ -159,7 +168,7 @@ export default function AboutSection() {
               letterSpacing: "0.3em", 
               color: "#111111", 
               textTransform: "uppercase", 
-              marginTop: "10rem",
+              marginTop: "clamp(3rem, 6vw, 6rem)",
               fontWeight: 600,
               opacity: inView ? 1 : 0,
             }}

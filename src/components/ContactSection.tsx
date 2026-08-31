@@ -41,55 +41,55 @@ export default function ContactSection() {
           </h2>
         </motion.div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.3fr", gap: "4rem", alignItems: "start" }} className="lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-8 lg:gap-16 items-start">
 
           {/* Left info */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.1 }}
-            style={{ display: "flex", flexDirection: "column", gap: "2rem" }}
+            style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}
           >
             {/* Info cards */}
             {[
               { icon: MapPin, label: "Location",  value: "Punjab, India · Remote OK" },
               { icon: Clock,  label: "Response",  value: "Usually within 24 hours" },
             ].map(({ icon: Icon, label, value }) => (
-              <div key={label} style={{ display: "flex", alignItems: "center", gap: 16, padding: "1.25rem 1.5rem", border: "1px solid var(--border)" }}>
-                <div style={{ width: 44, height: 44, borderRadius: 0, background: "transparent", border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--red)", flexShrink: 0 }}>
+              <div key={label} className="p-4 md:p-5" style={{ display: "flex", alignItems: "center", gap: 14, border: "1px solid var(--border)" }}>
+                <div style={{ width: 40, height: 40, borderRadius: 0, background: "transparent", border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--red)", flexShrink: 0 }}>
                   <Icon size={18} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 4, fontWeight: 600 }}>{label}</div>
-                  <div style={{ fontWeight: 600, color: "var(--fg)", fontSize: "0.95rem" }}>{value}</div>
+                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 2, fontWeight: 600 }}>{label}</div>
+                  <div style={{ fontWeight: 600, color: "var(--fg)", fontSize: "0.9rem" }}>{value}</div>
                 </div>
               </div>
             ))}
 
             {/* Availability badge */}
-            <div style={{ padding: "1.25rem 1.5rem", borderLeft: "3px solid var(--red)", background: "var(--bg)", border: "1px solid var(--border)" }}>
+            <div className="p-4 md:p-5" style={{ borderLeft: "3px solid var(--red)", background: "var(--bg)", border: "1px solid var(--border)" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--red)" }} />
                 <span style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--red)", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Available Now</span>
               </div>
-              <p style={{ fontSize: "0.9rem", color: "var(--fg-2)", lineHeight: 1.7 }}>
+              <p style={{ fontSize: "0.88rem", color: "var(--fg-2)", lineHeight: 1.65 }}>
                 Open to full-time roles, freelance contracts, and exciting collaborations in AI & Full-Stack.
               </p>
             </div>
 
             {/* Socials */}
-            <div style={{ display: "flex", gap: 12 }}>
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
               {SOCIALS.map(({ icon: Icon, href, label }) => (
                 <motion.a
                   key={label} href={href} target="_blank" rel="noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   title={label}
-                  style={{ width: 48, height: 48, borderRadius: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--fg-2)", textDecoration: "none", border: "1px solid var(--border)", transition: "color 0.2s, border-color 0.2s" }}
+                  style={{ width: 44, height: 44, borderRadius: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--fg-2)", textDecoration: "none", border: "1px solid var(--border)", transition: "color 0.2s, border-color 0.2s" }}
                   onMouseEnter={e => { e.currentTarget.style.color = "var(--red)"; e.currentTarget.style.borderColor = "var(--red)"; }}
                   onMouseLeave={e => { e.currentTarget.style.color = "var(--fg-2)"; e.currentTarget.style.borderColor = "var(--border)"; }}
                 >
-                  <Icon size={20} />
+                  <Icon size={18} />
                 </motion.a>
               ))}
             </div>
@@ -97,19 +97,20 @@ export default function ContactSection() {
 
           {/* Right: Form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.2 }}
-            style={{ padding: "2.5rem", border: "1px solid var(--border)", background: "var(--bg)" }}
+            className="p-6 md:p-10"
+            style={{ border: "1px solid var(--border)", background: "var(--bg)" }}
           >
-            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem" }}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   { label: "Name",  type: "text",  placeholder: "Your name",    id: "name"  },
                   { label: "Email", type: "email", placeholder: "your@email.com", id: "email" },
                 ].map(f => (
                   <div key={f.id}>
-                    <label htmlFor={f.id} style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                    <label htmlFor={f.id} style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 6 }}>
                       {f.label}
                     </label>
                     <input id={f.id} type={f.type} placeholder={f.placeholder} required className="input-field" />
@@ -118,17 +119,17 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <label htmlFor="subject" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                <label htmlFor="subject" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 6 }}>
                   Subject
                 </label>
                 <input id="subject" type="text" placeholder="What's this about?" className="input-field" />
               </div>
 
               <div>
-                <label htmlFor="message" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 8 }}>
+                <label htmlFor="message" style={{ display: "block", fontFamily: "var(--font-mono)", fontSize: 10, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--fg-3)", marginBottom: 6 }}>
                   Message
                 </label>
-                <textarea id="message" rows={5} placeholder="Tell me about your project..." required className="input-field" style={{ resize: "none" }} />
+                <textarea id="message" rows={4} placeholder="Tell me about your project..." required className="input-field" style={{ resize: "none" }} />
               </div>
 
               <motion.button
@@ -137,7 +138,7 @@ export default function ContactSection() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 disabled={sending || sent}
-                style={{ width: "100%", opacity: sending ? 0.7 : 1, gap: 10, position: "relative", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center" }}
+                style={{ width: "100%", opacity: sending ? 0.7 : 1, gap: 10, position: "relative", overflow: "hidden", display: "flex", justifyContent: "center", alignItems: "center", padding: "0.9rem 2rem" }}
               >
                 {sent ? (
                   <span>✓ Message Sent!</span>

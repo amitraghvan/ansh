@@ -22,9 +22,9 @@ export default function HeroSection() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    // Initial center position (fallback for SSR)
+    // Initial center position
     if (typeof window !== "undefined") {
-      mouseX.set(window.innerWidth * 0.65);
+      mouseX.set(window.innerWidth * 0.5);
       mouseY.set(window.innerHeight * 0.45);
     }
 
@@ -33,25 +33,40 @@ export default function HeroSection() {
       mouseY.set(e.clientY);
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        mouseX.set(e.touches[0].clientX);
+        mouseY.set(e.touches[0].clientY);
+      }
+    };
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("touchstart", handleTouchMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("touchstart", handleTouchMove);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [mouseX, mouseY]);
 
   // Framer Motion template to dynamically update the clip path
-  const clipPath = useMotionTemplate`circle(clamp(80px, 15vw, 250px) at ${cursorX}px ${cursorY}px)`;
+  const clipPath = useMotionTemplate`circle(clamp(70px, 16vw, 240px) at ${cursorX}px ${cursorY}px)`;
 
   return (
     <section ref={ref} style={{
       position: "relative",
-      height: "100vh",
+      height: "100svh", // Use modern small viewport height for mobile browsers
+      minHeight: "560px",
       width: "100%",
       overflow: "hidden",
-      backgroundColor: "#111111", // Dark background matching the reference
-      color: "#e3dfc8",          // Sand/beige text matching the reference
+      backgroundColor: "#111111",
+      color: "#e3dfc8",
       fontFamily: "var(--font-display)",
     }}>
 
-      {/* ── BACKGROUND IMAGE (Grayscale, dark, high contrast) ── */}
+      {/* ── BACKGROUND IMAGE ── */}
       <motion.div style={{ position: "absolute", inset: 0, zIndex: 0, y: yBg, opacity: 0.5 }}>
         <Image
           src="/profile.jpg"
@@ -59,7 +74,7 @@ export default function HeroSection() {
           fill
           style={{
             objectFit: "cover",
-            objectPosition: "center",
+            objectPosition: "center 30%",
             filter: "grayscale(100%) contrast(1.2) brightness(0.6)",
           }}
           priority
@@ -67,81 +82,33 @@ export default function HeroSection() {
         {/* Vignette/Fade to black on edges */}
         <div style={{
           position: "absolute", inset: 0,
-          background: "radial-gradient(circle at center, transparent 30%, #111111 80%)"
+          background: "radial-gradient(circle at center, transparent 20%, #111111 85%)"
         }} />
       </motion.div>
 
-      {/* ── TOP NAV / LOGO ── */}
-      <div style={{
-        position: "absolute", top: 40, left: 40, right: 40, zIndex: 50,
-        display: "flex", justifyContent: "space-between", alignItems: "flex-start",
-        fontFamily: "var(--font-sans)", fontSize: 12, fontWeight: 600, letterSpacing: "0.1em"
-      }}>
-        {/* Logo */}
-        <div style={{
-          width: 48, height: 48, borderRadius: "50%",
-          backgroundColor: "#e3dfc8", display: "flex", alignItems: "center", justifyContent: "center",
-          color: "#111111"
-        }}>
-          {/* Custom minimal abstract logo resembling the cat/ears */}
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M4 20L8 8L12 12L16 8L20 20H4Z" />
-          </svg>
-        </div>
-
-        {/* Top Center Name */}
-        <div style={{ marginTop: 12, letterSpacing: "0.4em", textTransform: "uppercase" }}>
-          AMIT KUMAR
-        </div>
-
-        {/* Right Nav */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, textAlign: "right", color: "#888" }}>
-          <span style={{ color: "#e3dfc8", cursor: "pointer" }}>ABOUT</span>
-          <span style={{ cursor: "pointer" }}>WORK</span>
-          <span style={{ cursor: "pointer" }}>CONTACT</span>
-        </div>
-      </div>
-
       {/* ── SIDEBAR SOCIALS (Left) ── */}
-      <div style={{
-        position: "absolute", bottom: 40, left: 40, zIndex: 50,
-        display: "flex", flexDirection: "column", gap: 24, color: "#e3dfc8"
-      }}>
-        <a href="#" style={{ opacity: 0.6 }}><TwitterIcon size={20} /></a>
-        <a href="https://wa.me/917488698672" target="_blank" rel="noreferrer" style={{ opacity: 0.6 }}><WhatsAppIcon size={20} /></a>
-        <a href="https://github.com/amitraghvan" target="_blank" rel="noreferrer" style={{ opacity: 0.6 }}><GithubIcon size={20} /></a>
-        <a href="#" style={{ opacity: 0.6 }}><LinkedinIcon size={20} /></a>
+      <div className="absolute bottom-6 left-5 md:bottom-10 md:left-10 z-30 flex md:flex-col gap-4 md:gap-6 text-[#e3dfc8]">
+        <a href="#" className="opacity-60 hover:opacity-100 transition-opacity p-1"><TwitterIcon size={18} /></a>
+        <a href="https://wa.me/917488698672" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><WhatsAppIcon size={18} /></a>
+        <a href="https://github.com/amitraghvan" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><GithubIcon size={18} /></a>
+        <a href="#" className="opacity-60 hover:opacity-100 transition-opacity p-1"><LinkedinIcon size={18} /></a>
       </div>
 
-      {/* ── SCROLL / SOUND LABEL (Right) ── */}
-      <div style={{
-        position: "absolute", bottom: 80, right: -20, zIndex: 50,
-        transform: "rotate(-90deg)", transformOrigin: "center right",
-        fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 600, letterSpacing: "0.2em",
-        color: "#666"
-      }}>
+      {/* ── SCROLL / SOUND LABEL (Right) - Desktop only ── */}
+      <div className="hidden md:block absolute bottom-20 -right-5 z-30 -rotate-90 origin-center-right font-sans text-[11px] font-semibold tracking-[0.2em] text-[#666]">
         SOUND ON
       </div>
 
       {/* ── GIANT TYPOGRAPHY & OVERLAY EFFECT ── */}
-      {/* 
-        To achieve the exact look where text is beige on black, but black on the red circle,
-        we use CSS mix-blend-mode: difference. 
-        Wait, for pure precise control like the screenshot, we use two identical text layers.
-        Layer 1: Beige Text behind the circle.
-        Layer 2: The Red Circle.
-        Layer 3: Black Text clipped exactly to the red circle!
-      */}
-
       {/* The Text Block Template */}
       <motion.div style={{
         position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
-        zIndex: 10, y: yText, pointerEvents: "none"
+        zIndex: 10, y: yText, pointerEvents: "none", padding: "0 1rem"
       }}>
         <h1 style={{
-          fontSize: "clamp(6rem, 16vw, 15rem)",
+          fontSize: "clamp(3.4rem, 14vw, 15rem)",
           fontWeight: 800,
-          lineHeight: 0.82,
+          lineHeight: 0.88,
           letterSpacing: "-0.05em",
           textAlign: "center",
           margin: 0,
@@ -149,8 +116,17 @@ export default function HeroSection() {
         }}>
           I AM<br />
           AMIT<br />
-          KUMAR<br />
-          <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "0.05em", display: "block", marginTop: "1rem" }}>FULL STACK DEV</span>
+          <span style={{
+            fontFamily: "var(--font-sans)",
+            fontWeight: 600,
+            fontSize: "clamp(1.1rem, 3.8vw, 3.2rem)",
+            letterSpacing: "0.06em",
+            display: "block",
+            marginTop: "clamp(0.6rem, 1.8vw, 1.4rem)",
+            color: "var(--fg-2)"
+          }}>
+            FULL STACK DEV
+          </span>
         </h1>
       </motion.div>
 
@@ -158,34 +134,43 @@ export default function HeroSection() {
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
         style={{
           position: "absolute", inset: 0, zIndex: 20, pointerEvents: "none",
-          clipPath // Dynamic clip path follows mouse
+          clipPath
         }}
       >
         {/* The Red Background inside the circle */}
         <div style={{ position: "absolute", inset: 0, backgroundColor: "#eb5939" }} />
 
-        {/* The exact same Text Block, but Black, moving identically */}
+        {/* The exact same Text Block, but Black */}
         <motion.div style={{
           position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center",
-          y: yText
+          y: yText, padding: "0 1rem"
         }}>
           <h1 style={{
-            fontSize: "clamp(6rem, 16vw, 15rem)",
+            fontSize: "clamp(3.4rem, 14vw, 15rem)",
             fontWeight: 800,
-            lineHeight: 0.82,
+            lineHeight: 0.88,
             letterSpacing: "-0.05em",
             textAlign: "center",
             margin: 0,
-            color: "#111111", // Black text inside the circle
+            color: "#111111",
             textTransform: "uppercase"
           }}>
             I AM<br />
             AMIT<br />
-            KUMAR<br />
-            <span style={{ fontFamily: "var(--font-sans)", fontWeight: 500, fontSize: "clamp(2rem, 5vw, 4rem)", letterSpacing: "0.05em", display: "block", marginTop: "1rem" }}>FULL STACK DEV</span>
+            <span style={{
+              fontFamily: "var(--font-sans)",
+              fontWeight: 600,
+              fontSize: "clamp(1.1rem, 3.8vw, 3.2rem)",
+              letterSpacing: "0.06em",
+              display: "block",
+              marginTop: "clamp(0.6rem, 1.8vw, 1.4rem)",
+              color: "#111111"
+            }}>
+              FULL STACK DEV
+            </span>
           </h1>
         </motion.div>
       </motion.div>

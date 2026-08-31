@@ -52,18 +52,18 @@ export default function Navbar() {
         <div className="section-wrap" style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
 
           {/* Logo */}
-          <motion.a href="#" whileHover={{ scale: 1.05 }} style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
+          <motion.a href="#" whileHover={{ scale: 1.03 }} style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
             <div style={{
-              width: 36, height: 36,
+              width: 34, height: 34,
               background: "var(--red)",
               display: "flex", alignItems: "center", justifyContent: "center",
-              fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 16, color: "#111",
+              fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 15, color: "#111",
             }}>A</div>
             <div>
-              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 15, color: "var(--fg)", letterSpacing: "-0.02em", textTransform: "uppercase" }}>
-                Amit Kumar
+              <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(13px, 3.5vw, 15px)", color: "var(--fg)", letterSpacing: "-0.02em", textTransform: "uppercase" }}>
+                Amit
               </div>
-              <div style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--fg-3)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
+              <div className="hidden sm:block" style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--fg-3)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
                 {time} · PUNJAB, INDIA
               </div>
             </div>

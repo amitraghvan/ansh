@@ -79,7 +79,7 @@ export default function ProjectsSection() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "4rem", flexWrap: "wrap", gap: "2rem" }}
+          style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: "clamp(2.5rem, 5vw, 4rem)", flexWrap: "wrap", gap: "1.5rem" }}
         >
           <div>
             <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", letterSpacing: "0.3em", color: "#888888", textTransform: "uppercase", fontWeight: 600 }}>Selected Work</span>
@@ -93,19 +93,20 @@ export default function ProjectsSection() {
             target="_blank" rel="noreferrer"
             className="btn-ghost"
             whileHover={{ scale: 1.04 }}
+            style={{ padding: "0.75rem 1.75rem", fontSize: "0.8rem" }}
           >
             GitHub ↗
           </motion.a>
         </motion.div>
 
-        {/* Project cards — Flat Brutalist */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "1.5rem" }}>
+        {/* Project cards — Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PROJECTS.map((p, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 50 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: i * 0.12, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               onHoverStart={() => setHovered(i)}
               onHoverEnd={() => setHovered(null)}
               style={{ height: "100%" }}
@@ -128,24 +129,28 @@ export default function ProjectsSection() {
                     src={p.image}
                     alt={p.title}
                     fill
-                    style={{ objectFit: "cover", transition: "transform 0.7s ease, filter 0.5s", filter: hovered === i ? "grayscale(0%)" : "grayscale(100%) contrast(1.2)" }}
+                    style={{
+                      objectFit: "cover",
+                      transition: "transform 0.7s ease, filter 0.5s",
+                      filter: hovered === i ? "grayscale(0%)" : "grayscale(80%) contrast(1.1)"
+                    }}
                     className={hovered === i ? "scale-105" : "scale-100"}
-                    sizes="40vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   {/* Stat badge */}
                   <div style={{
-                    position: "absolute", top: 16, right: 16,
-                    padding: "6px 12px",
+                    position: "absolute", top: 12, right: 12,
+                    padding: "4px 10px",
                     background: "var(--red)", color: "#111",
-                    fontFamily: "var(--font-sans)", fontSize: 10,
+                    fontFamily: "var(--font-sans)", fontSize: 9,
                     letterSpacing: "0.1em", fontWeight: 800,
                     textTransform: "uppercase"
                   }}>
                     {p.stat}
                   </div>
                   <div style={{
-                    position: "absolute", top: 16, left: 16,
-                    fontFamily: "var(--font-display)", fontSize: 16, fontWeight: 800,
+                    position: "absolute", top: 12, left: 12,
+                    fontFamily: "var(--font-display)", fontSize: 14, fontWeight: 800,
                     color: "var(--red)",
                   }}>
                     {p.num}
@@ -153,27 +158,29 @@ export default function ProjectsSection() {
                 </div>
 
                 {/* Content */}
-                <div style={{ padding: "2rem", flex: 1, display: "flex", flexDirection: "column", background: "var(--bg)" }}>
-                  <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 12, fontWeight: 600 }}>
-                    {p.category}
+                <div className="p-5 md:p-7 flex-1 flex flex-col justify-between" style={{ background: "var(--bg)" }}>
+                  <div>
+                    <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontWeight: 600 }}>
+                      {p.category}
+                    </div>
+                    <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.2rem, 2.5vw, 1.4rem)", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.03em", marginBottom: 10 }}>
+                      {p.title}
+                    </h3>
+                    <p style={{ fontSize: "0.9rem", color: "var(--fg-3)", lineHeight: 1.6, marginBottom: 16 }}>{p.description}</p>
                   </div>
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.5rem", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.04em", marginBottom: 16 }}>
-                    {p.title}
-                  </h3>
-                  <p style={{ fontSize: "1rem", color: "var(--fg-3)", lineHeight: 1.6, flex: 1 }}>{p.description}</p>
 
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 24 }}>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                      {p.tags.map(t => (
-                        <span key={t} className="tag" style={{ border: "1px solid var(--border-2)", color: "var(--fg-2)", background: "transparent" }}>{t}</span>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", gap: "0.5rem" }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem" }}>
+                      {p.tags.slice(0, 3).map(t => (
+                        <span key={t} className="tag text-[0.68rem] px-2 py-0.5" style={{ border: "1px solid var(--border-2)", color: "var(--fg-2)", background: "transparent" }}>{t}</span>
                       ))}
                     </div>
                     <motion.div
                       animate={hovered === i ? { rotate: 45, backgroundColor: "#eb5939", color: "#111" } : { rotate: 0, backgroundColor: "rgba(0, 0, 0, 0)", color: "var(--fg-3)" }}
                       transition={{ duration: 0.25 }}
-                      style={{ width: 40, height: 40, border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
+                      style={{ width: 34, height: 34, border: `1px solid var(--border-2)`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}
                     >
-                      <ArrowUpRight size={18} />
+                      <ArrowUpRight size={16} />
                     </motion.div>
                   </div>
                 </div>

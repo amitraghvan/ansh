@@ -107,8 +107,9 @@ body {
 @media (min-width: 768px)  { .section-wrap { padding: 0 3.5rem; } }
 @media (min-width: 1280px) { .section-wrap { padding: 0 6rem; } }
 
-.section-spacing { padding: 7rem 0; }
-@media (min-width: 768px) { .section-spacing { padding: 10rem 0; } }
+.section-spacing { padding: 4.5rem 0; }
+@media (min-width: 768px) { .section-spacing { padding: 8rem 0; } }
+@media (min-width: 1280px) { .section-spacing { padding: 10rem 0; } }
 
 /* ═══════════════════════════════════════════════════════════
    FLAT CARD

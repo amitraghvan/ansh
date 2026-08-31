@@ -9,7 +9,7 @@ export default function StatementSection() {
   const WORDS = ["complexity", "into", "clarity", "—", "one", "system", "at", "a", "time."];
 
   return (
-    <section ref={ref} style={{ position: "relative", padding: "8rem 0", overflow: "hidden", background: "var(--bg-2)" }}>
+    <section ref={ref} style={{ position: "relative", padding: "clamp(4.5rem, 8vw, 8rem) 0", overflow: "hidden", background: "var(--bg-2)" }}>
       <div style={{ position: "absolute", inset: 0, borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }} />
 
       {/* Solid flat grid */}
@@ -24,23 +24,23 @@ export default function StatementSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.2em", color: "var(--fg-3)", textTransform: "uppercase", marginBottom: 32 }}
+          style={{ fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.2em", color: "var(--fg-3)", textTransform: "uppercase", marginBottom: 24 }}
         >
           {new Date().getFullYear()} · Core Manifesto
         </motion.div>
 
         <h2 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(2rem, 6vw, 6rem)",
-          fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1,
-          display: "flex", flexWrap: "wrap", gap: "0.3em",
+          fontSize: "clamp(1.75rem, 5.5vw, 5.5rem)",
+          fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.1,
+          display: "flex", flexWrap: "wrap", gap: "0.25em",
         }}>
           {["Turning"].map((word, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 60, rotateX: -60 }}
+              initial={{ opacity: 0, y: 40, rotateX: -40 }}
               animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-              transition={{ delay: i * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: i * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               style={{ display: "inline-block", color: "var(--fg)", perspective: 1000 }}
             >
               {word}
@@ -49,9 +49,9 @@ export default function StatementSection() {
           {WORDS.map((word, i) => (
             <motion.span
               key={word + i}
-              initial={{ opacity: 0, y: 60, rotateX: -60 }}
+              initial={{ opacity: 0, y: 40, rotateX: -40 }}
               animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-              transition={{ delay: (i + 1) * 0.08, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: (i + 1) * 0.08, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               style={{
                 display: "inline-block",
                 perspective: 1000,

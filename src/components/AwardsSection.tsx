@@ -19,19 +19,19 @@ export default function AwardsSection() {
 
       {/* Awards */}
       <div className="section-wrap section-spacing">
-        <div style={{ display: "grid", gridTemplateColumns: "0.8fr 1.2fr", gap: "6rem", alignItems: "start" }} className="lg:grid-cols-2">
+        <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-8 lg:gap-20 items-start">
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            style={{ position: "sticky", top: "8rem" }}
+            className="static lg:sticky top-32"
           >
             <span style={{ fontFamily: "var(--font-sans)", fontSize: "0.75rem", letterSpacing: "0.3em", color: "#888888", textTransform: "uppercase", fontWeight: 600 }}>Recognized For</span>
             <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 4rem)", fontWeight: 700, letterSpacing: "-0.05em", color: "var(--fg)", margin: "16px 0 0 0", lineHeight: 1 }}>
               Awards &amp;<br />
               <span style={{ color: "var(--red)" }}>recognitions.</span>
             </h2>
-            <p className="body-large" style={{ marginTop: 24, color: "var(--fg-3)" }}>
+            <p className="body-large" style={{ marginTop: 20, color: "var(--fg-3)", fontSize: "1rem" }}>
               Building at the frontier of what&apos;s possible.
             </p>
           </motion.div>
@@ -40,22 +40,23 @@ export default function AwardsSection() {
             {AWARDS.map((a, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0, x: 40 }}
+                initial={{ opacity: 0, x: 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: i * 0.12, duration: 0.7 }}
-                whileHover={{ x: 8, borderColor: "var(--red)" }}
-                style={{ padding: "2rem", border: `1px solid var(--border)`, cursor: "default", background: "var(--bg)", transition: "all 0.3s" }}
+                whileHover={{ x: 6, borderColor: "var(--red)" }}
+                className="p-5 md:p-8"
+                style={{ border: `1px solid var(--border)`, cursor: "default", background: "var(--bg)", transition: "all 0.3s" }}
               >
-                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 12 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 10, gap: 12 }}>
                   <div>
-                    <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--red)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 8, fontWeight: 600 }}>{a.num}</div>
-                    <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.02em" }}>{a.title}</h3>
+                    <div style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--red)", letterSpacing: "0.2em", textTransform: "uppercase", marginBottom: 6, fontWeight: 600 }}>{a.num}</div>
+                    <h3 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.1rem, 2.5vw, 1.3rem)", fontWeight: 700, color: "var(--fg)", letterSpacing: "-0.02em" }}>{a.title}</h3>
                   </div>
-                  <span style={{ background: "var(--red)", color: "#111", border: `1px solid var(--red)`, fontFamily: "var(--font-sans)", fontSize: 11, fontWeight: 800, padding: "4px 12px", borderRadius: 0, letterSpacing: "0.1em" }}>
+                  <span style={{ background: "var(--red)", color: "#111", border: `1px solid var(--red)`, fontFamily: "var(--font-sans)", fontSize: 10, fontWeight: 800, padding: "4px 10px", borderRadius: 0, letterSpacing: "0.1em", flexShrink: 0 }}>
                     {a.count}
                   </span>
                 </div>
-                <p style={{ fontSize: "0.9rem", color: "var(--fg-3)", lineHeight: 1.7 }}>{a.desc}</p>
+                <p style={{ fontSize: "0.88rem", color: "var(--fg-3)", lineHeight: 1.65 }}>{a.desc}</p>
               </motion.div>
             ))}
           </div>
