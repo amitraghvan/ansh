@@ -67,15 +67,16 @@ export default function HeroSection() {
     }}>
 
       {/* ── BACKGROUND IMAGE ── */}
-      <motion.div style={{ position: "absolute", inset: 0, zIndex: 0, y: yBg, opacity: 0.5 }}>
+      <motion.div style={{ position: "absolute", inset: 0, zIndex: 0, y: yBg, opacity: 0.55 }}>
         <Image
-          src="/profile.jpg"
-          alt="Background"
+          src="/ansh-profile.png"
+          alt="Ansh Verma - Full-Stack Developer"
           fill
+          unoptimized
           style={{
             objectFit: "cover",
-            objectPosition: "center 30%",
-            filter: "grayscale(100%) contrast(1.2) brightness(0.6)",
+            objectPosition: "center 28%",
+            filter: "grayscale(100%) contrast(1.15) brightness(0.7)",
           }}
           priority
         />
@@ -88,10 +89,9 @@ export default function HeroSection() {
 
       {/* ── SIDEBAR SOCIALS (Left) ── */}
       <div className="absolute bottom-6 left-5 md:bottom-10 md:left-10 z-30 flex md:flex-col gap-4 md:gap-6 text-[#e3dfc8]">
-        <a href="#" className="opacity-60 hover:opacity-100 transition-opacity p-1"><TwitterIcon size={18} /></a>
-        <a href="https://wa.me/917488698672" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><WhatsAppIcon size={18} /></a>
-        <a href="https://github.com/amitraghvan" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><GithubIcon size={18} /></a>
-        <a href="#" className="opacity-60 hover:opacity-100 transition-opacity p-1"><LinkedinIcon size={18} /></a>
+        <a href="https://wa.me/919120850085" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><WhatsAppIcon size={18} /></a>
+        <a href="https://github.com/anshv9218-max" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><GithubIcon size={18} /></a>
+        <a href="https://linkedin.com/in/ansh-verma" target="_blank" rel="noreferrer" className="opacity-60 hover:opacity-100 transition-opacity p-1"><LinkedinIcon size={18} /></a>
       </div>
 
       {/* ── SCROLL / SOUND LABEL (Right) - Desktop only ── */}
@@ -115,7 +115,7 @@ export default function HeroSection() {
           textTransform: "uppercase"
         }}>
           I AM<br />
-          AMIT<br />
+          ANSH<br />
           <span style={{
             fontFamily: "var(--font-sans)",
             fontWeight: 600,
@@ -159,7 +159,7 @@ export default function HeroSection() {
             textTransform: "uppercase"
           }}>
             I AM<br />
-            AMIT<br />
+            ANSH<br />
             <span style={{
               fontFamily: "var(--font-sans)",
               fontWeight: 600,

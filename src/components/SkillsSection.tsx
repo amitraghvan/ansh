@@ -4,10 +4,10 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 
 const CATS = [
-  { num: "01", title: "Frontend Engineering", skills: ["React 19", "Next.js", "TypeScript", "TailwindCSS", "Framer Motion", "Redux", "WebSockets", "Figma"] },
-  { num: "02", title: "Backend Architecture", skills: ["Node.js", "Express", "NestJS", "Python", "C++", "GraphQL", "REST APIs", "Microservices"] },
-  { num: "03", title: "Cloud & Infrastructure", skills: ["PostgreSQL", "MongoDB", "Redis", "Docker", "AWS", "Vercel", "Prisma", "Linux", "CI/CD"] },
-  { num: "04", title: "AI & Core Systems",      skills: ["TensorFlow", "LangChain", "OpenAI", "System Design", "Data Structures", "Algorithms", "NLP"] },
+  { num: "01", title: "Technical Skills & Languages", skills: ["C", "C++", "Python", "JavaScript", "SQL", "HTML", "CSS"] },
+  { num: "02", title: "Tools & Environments",        skills: ["VS Code", "PyCharm", "Jupyter Notebook", "GitHub"] },
+  { num: "03", title: "AI Tools & Platforms",        skills: ["Claude", "Gemini", "GPT", "Antigravity"] },
+  { num: "04", title: "Professional & Soft Skills",   skills: ["Problem Solving", "Time Management", "Teamwork", "Project Management", "Adaptability"] },
 ];
 
 export default function SkillsSection() {

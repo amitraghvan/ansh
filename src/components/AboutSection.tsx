@@ -94,7 +94,7 @@ export default function AboutSection() {
             margin: 0
           }}
         >
-          I&apos;m a <span style={{ color: "#eb5939" }}>selectively skilled</span> product designer with strong focus on producing high quality &amp; impactful digital experience.
+          Hi, I&apos;m <span style={{ color: "#eb5939" }}>Ansh Verma</span> — a Computer Science &amp; Engineering student and Full-Stack Developer passionate about building practical, scalable, and user-focused digital solutions.
         </motion.h2>
 
         <motion.div
@@ -158,7 +158,7 @@ export default function AboutSection() {
               opacity: inView ? 1 : 0,
             }}
           >
-            I&apos;m a visual designer crafting modern software that speaks for itself.
+            I enjoy turning ideas into functional products, from full-stack web applications to IoT and AI-driven projects.
           </h2>
 
           <div

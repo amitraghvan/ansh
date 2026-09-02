@@ -6,7 +6,7 @@ export default function StatementSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-15%" });
 
-  const WORDS = ["complexity", "into", "clarity", "—", "one", "system", "at", "a", "time."];
+  const WORDS = ["ideas", "into", "functional", "products", "—", "from", "web", "to", "IoT."];
 
   return (
     <section ref={ref} style={{ position: "relative", padding: "clamp(4.5rem, 8vw, 8rem) 0", overflow: "hidden", background: "var(--bg-2)" }}>
@@ -55,7 +55,7 @@ export default function StatementSection() {
               style={{
                 display: "inline-block",
                 perspective: 1000,
-                color: (i > 1 && i < 5) ? "var(--red)" : "var(--fg)",
+                color: (i === 2 || i === 3) ? "var(--red)" : "var(--fg)",
               }}
             >
               {word}

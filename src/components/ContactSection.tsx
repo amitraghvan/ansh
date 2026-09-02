@@ -5,10 +5,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
 const SOCIALS = [
-  { icon: GithubIcon,   href: "https://github.com/amitraghvan", label: "GitHub" },
-  { icon: LinkedinIcon, href: "https://www.linkedin.com/in/amitraghvan/", label: "LinkedIn" },
-  { icon: TwitterIcon,  href: "#", label: "Twitter" },
-  { icon: WhatsAppIcon, href: "https://wa.me/+917488698672", label: "WhatsApp" },
+  { icon: GithubIcon,   href: "https://github.com/anshv9218-max", label: "GitHub" },
+  { icon: LinkedinIcon, href: "https://linkedin.com/in/ansh-verma", label: "LinkedIn" },
+  { icon: WhatsAppIcon, href: "https://wa.me/919120850085", label: "WhatsApp" },
 ];
 
 export default function ContactSection() {
@@ -52,7 +51,7 @@ export default function ContactSection() {
           >
             {/* Info cards */}
             {[
-              { icon: MapPin, label: "Location",  value: "Punjab, India · Remote OK" },
+              { icon: MapPin, label: "Location",  value: "Phagwara, Punjab · LPU" },
               { icon: Clock,  label: "Response",  value: "Usually within 24 hours" },
             ].map(({ icon: Icon, label, value }) => (
               <div key={label} className="p-4 md:p-5" style={{ display: "flex", alignItems: "center", gap: 14, border: "1px solid var(--border)" }}>
@@ -73,7 +72,7 @@ export default function ContactSection() {
                 <span style={{ fontFamily: "var(--font-sans)", fontSize: 10, color: "var(--red)", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Available Now</span>
               </div>
               <p style={{ fontSize: "0.88rem", color: "var(--fg-2)", lineHeight: 1.65 }}>
-                Open to full-time roles, freelance contracts, and exciting collaborations in AI & Full-Stack.
+                Open to software engineering internships, entry-level developer roles, and practical full-stack &amp; IoT projects.
               </p>
             </div>
 

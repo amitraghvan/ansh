@@ -61,7 +61,7 @@ export default function Navbar() {
             }}>A</div>
             <div>
               <div style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "clamp(13px, 3.5vw, 15px)", color: "var(--fg)", letterSpacing: "-0.02em", textTransform: "uppercase" }}>
-                Amit
+                Ansh
               </div>
               <div className="hidden sm:block" style={{ fontFamily: "var(--font-mono)", fontSize: 9, color: "var(--fg-3)", letterSpacing: "0.18em", textTransform: "uppercase" }}>
                 {time} · PUNJAB, INDIA
@@ -100,7 +100,7 @@ export default function Navbar() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.5 }}
-              href="https://wa.me/917488698672"
+              href="https://wa.me/919120850085"
               target="_blank" rel="noreferrer"
               className="btn-primary hidden md:flex"
               style={{ padding: "0.6rem 1.4rem", fontSize: "0.75rem", textDecoration: "none", gap: "0.5rem", alignItems: "center" }}
@@ -155,7 +155,7 @@ export default function Navbar() {
             ))}
             <div style={{ display: "flex", gap: 12, marginTop: "auto" }}>
               {/* Mobile theme toggle removed */}
-              <a href="https://wa.me/917488698672" target="_blank" rel="noreferrer" className="btn-primary" style={{ flex: 2, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", textDecoration: "none" }}>
+              <a href="https://wa.me/919120850085" target="_blank" rel="noreferrer" className="btn-primary" style={{ flex: 2, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.75rem", textDecoration: "none" }}>
                 <WhatsAppIcon size={18} />
                 Connect
               </a>

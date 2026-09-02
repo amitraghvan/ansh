@@ -7,63 +7,23 @@ import { useRef, useState } from "react";
 const PROJECTS = [
   {
     num: "01",
-    title: "Cinematic Beats Hub",
-    category: "AI Music Platform",
-    description: "An immersive platform where sound meets soul. Featuring AI-generated soundtracks and a premium dark studio aesthetic.",
-    tags: ["React Three Fiber", "AI/LLM", "TypeScript", "Tailwind"],
-    image: "/proj-cinematic.png",
-    link: "https://cinematic-beats-hub.vercel.app/",
-    stat: "3D & AI",
+    title: "SkyWatch",
+    category: "Real-Time Weather Web App",
+    description: "Full-stack weather application providing live forecasts, AQI monitoring, UV index, and autocomplete location search with dynamic interface updates.",
+    tags: ["Python", "Flask", "JavaScript", "OpenWeatherMap"],
+    image: "/proj-skywatch.png",
+    link: "https://github.com/anshv9218-max",
+    stat: "Live Weather",
   },
   {
     num: "02",
-    title: "Secura AI",
-    category: "AI Career Platform",
-    description: "A next-generation career platform using AI to optimize resumes, track applications, and provide intelligent interview coaching.",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
-    image: "/proj-campus.png",
-    link: "https://campus-careers-mate-948h.vercel.app/",
-    stat: "Career Hub",
-  },
-  {
-    num: "03",
-    title: "Vastrika Group",
-    category: "Industrial E-Commerce",
-    description: "Full-stack supply chain and digital storefront for Yadav Traders, facilitating government and institutional supplies at scale.",
-    tags: ["Next.js", "PostgreSQL", "Prisma", "Tailwind"],
-    image: "/proj-vastrika.png",
-    link: "https://vastrika-prime-hub.vercel.app/",
-    stat: "B2B Portal",
-  },
-  {
-    num: "04",
-    title: "DG Travel",
-    category: "Travel & Tourism",
-    description: "A premium travel booking engine featuring dynamic itineraries, high-res destination discovery, and seamless checkout.",
-    tags: ["Next.js", "React", "Node.js", "Stripe API"],
-    image: "/proj-dgtravel.png",
-    link: "https://www.dgtravel.in/",
-    stat: "Live Site",
-  },
-  {
-    num: "05",
-    title: "Astro AI",
-    category: "Digital Growth Infrastructure",
-    description: "Intelligent systems designed to scale digital operations and safeguard growth against market shifts using predictive AI.",
-    tags: ["Full-Stack", "AI/LLM", "React", "Next.js"],
-    image: "/proj-astroai.png",
-    link: "https://astro-ai-two-weld.vercel.app/",
-    stat: "AI Growth",
-  },
-  {
-    num: "06",
-    title: "Desi Chaos Engine",
-    category: "Game Development",
-    description: "A robust 2D game engine built in Unity to simulate the chaotic and humorous elements of daily life in Indian environments.",
-    tags: ["Unity 2D", "C#", "Game Physics", "AI"],
-    image: "/proj-ai-obs.png", // Using as fallback for the game
-    link: "#",
-    stat: "Game Tech",
+    title: "Weather Music System",
+    category: "IoT / Smart Automation",
+    description: "IoT system linking ambient environmental conditions to automated music playback using an ESP32 microcontroller, DHT11 sensors, and DFPlayer Mini.",
+    tags: ["ESP32", "C++", "DHT11", "DFPlayer Mini"],
+    image: "/proj-weather-music.png",
+    link: "https://github.com/anshv9218-max",
+    stat: "IoT & Hardware",
   },
 ];
 
@@ -89,7 +49,7 @@ export default function ProjectsSection() {
             </h2>
           </div>
           <motion.a
-            href="https://github.com/amitraghvan"
+            href="https://github.com/anshv9218-max"
             target="_blank" rel="noreferrer"
             className="btn-ghost"
             whileHover={{ scale: 1.04 }}
@@ -100,7 +60,7 @@ export default function ProjectsSection() {
         </motion.div>
 
         {/* Project cards — Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {PROJECTS.map((p, i) => (
             <motion.div
               key={i}

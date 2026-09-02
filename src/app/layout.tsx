@@ -22,13 +22,13 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Amit Kumar — AI Engineer & Builder",
-  description: "Multidisciplinary AI Engineer crafting autonomous agents, intelligent systems & high-performance digital products.",
-  keywords: ["Amit Kumar", "AI Engineer", "Portfolio", "Machine Learning", "Next.js", "LangChain"],
-  authors: [{ name: "Amit Kumar" }],
+  title: "Ansh Verma — Full-Stack Developer",
+  description: "Computer Science & Engineering student and Full-Stack Developer who builds practical web applications, IoT systems, and AI-enabled solutions.",
+  keywords: ["Ansh Verma", "Full-Stack Developer", "Portfolio", "Computer Science", "IoT", "Flask", "Python", "C++", "Next.js"],
+  authors: [{ name: "Ansh Verma" }],
   openGraph: {
-    title: "Amit Kumar — AI Engineer & Builder",
-    description: "B.Tech CS | AI enthusiast | Building things that matter.",
+    title: "Ansh Verma — Full-Stack Developer",
+    description: "Computer Science & Engineering student and Full-Stack Developer who builds practical web applications, IoT systems, and AI-enabled solutions.",
     type: "website",
     locale: "en_IN",
   },

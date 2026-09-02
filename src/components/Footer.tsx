@@ -14,7 +14,7 @@ export default function Footer() {
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: "clamp(1rem, 3vw, 2.5rem)", flexWrap: "wrap", alignItems: "center" }}>
             <a
-              href="mailto:amitraghvan7488@gmail.com"
+              href="mailto:anshv9218@gmail.com"
               style={{
                 fontFamily: "var(--font-display)",
                 fontSize: "clamp(1.5rem, 4vw, 3.5rem)",
@@ -28,11 +28,11 @@ export default function Footer() {
               onMouseEnter={e => (e.currentTarget.style.opacity = "0.7")}
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
             >
-              amitraghvan7488@gmail.com
+              anshv9218@gmail.com
             </a>
             <span className="hidden sm:inline" style={{ color: "var(--border)", fontSize: "1.8rem" }}>|</span>
             <a
-              href="https://wa.me/917488698672"
+              href="https://wa.me/919120850085"
               target="_blank" rel="noreferrer"
               style={{
                 fontFamily: "var(--font-display)",
@@ -57,7 +57,7 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 32, height: 32, borderRadius: 0, background: "var(--red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-display)", fontWeight: 900, fontSize: 15, color: "#111" }}>A</div>
-            <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--fg)", fontSize: 15, letterSpacing: "-0.01em" }}>Amit</span>
+            <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--fg)", fontSize: 15, letterSpacing: "-0.01em" }}>Ansh</span>
           </div>
 
           <nav style={{ display: "flex", gap: "clamp(1rem, 2.5vw, 2rem)", flexWrap: "wrap", justifyContent: "center" }}>
