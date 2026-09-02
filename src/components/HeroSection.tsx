@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from "framer-motion";
 import { useRef, useEffect } from "react";
-import { GithubIcon, LinkedinIcon, TwitterIcon, WhatsAppIcon } from "./SocialIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "./SocialIcons";
 
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);

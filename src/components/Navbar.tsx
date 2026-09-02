@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "./ThemeProvider";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { WhatsAppIcon } from "./SocialIcons";
 
@@ -15,7 +14,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen]         = useState(false);
   const [time, setTime]         = useState("");
-  const { theme, toggle }       = useTheme();
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40);

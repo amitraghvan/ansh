@@ -1,6 +1,6 @@
 "use client";
 import { Send, MapPin, Clock } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterIcon, WhatsAppIcon } from "./SocialIcons";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "./SocialIcons";
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 
